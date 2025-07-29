@@ -37,10 +37,6 @@
             }
         }
     </script>
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body class="overflow-x-hidden text-[poppins]" id="swiftly">
@@ -370,7 +366,12 @@
                 "https://www.jotform.com")
         </script>
     </div>
+<!-- Vercel Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
 
+<script defer src="/_vercel/insights/script.js"></script>
     <script src="/js/agent.js"></script>
     <script src="/js/login.js"></script>
     <script src="/js/script.js"></script>
