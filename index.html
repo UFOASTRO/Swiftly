@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiftly</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://kit.fontawesome.com/0a8f9ea346.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <!-- NEW CODE: Link to cart page stylesheet -->
+    <link rel="stylesheet" href="css/cart.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tailwind Custom -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0084F0",
+                        secondary: "#6C757D",
+                        accent: "#7ED957",
+                        highlight: "#F5F5F5",
+                        white: "#FAF9F6"
+                    },
+                    fontFamily: {
+                        poppins: ["Poppins", "sans-serif"],
+                        roboto: ["Roboto", "sans-serif"],
+                        regular: ["Wix Madefor Text", "sans-serif"],
+                        dior: ["Noto Sans Warang Citi"],
+                        x: ["Big Shoulders Inline"],
+                        ex: ["Roboto Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+
+<body class="overflow-x-hidden text-[poppins]" id="swiftly">
+    <div class="ai-popup">
+        <script
+            src='https://cdn.jotfor.ms/agent/embedjs/01982d2f5bea7385813bfb66f4e57fa2932a/embed.js?skipWelcome=1&maximizable=1'></script>
+    </div>
+    <!-- loader -->
+    <div class="banter-loader" id="loader">
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+    </div>
+    <!-- NEW CODE: Cart Notification Dropdown -->
+    <div id="cartNotification"
+        class="fixed top-20 right-4 bg-[#0084F0] text-white px-6 py-4 rounded-md shadow-2xl hidden z-50 successful">
+        <span class="text-[var(--accent)] p-1 rounded-full bg-white font-semibold">✔</span> Item added to cart
+        successfully!
+    </div>
+    <div class="main hidden scroll-smooth" id="main">
+        <!-- SCROLL BAR -->
+        <header class="text-center">
+            <div class="marquee-container p-3 bg-black text-[var(--white)] overflow-hidden">
+                <div class="marquee whitespace-nowrap gap-8 font-regular flex font-bold text-[14px]">
+                    <p>FREE SHIPPING ON ALL ORDERS OVER ₦20,000</p>
+                    <p>FREE SHIPPING ON ALL ORDERS OVER ₦20,000</p>
+                    <p>FREE SHIPPING ON ALL ORDERS OVER ₦20,000</p>
+                    <p>FREE SHIPPING ON ALL ORDERS OVER ₦20,000</p>
+                </div>
+            </div>
+        </header>
+        <div class="nav sticky top-0 z-40">
+            <!-- Navbar -->
+            <nav
+                class="justify-between w-[100dvw] items-center sticky top-0 shadow-md p-6 z-50 right px-10 flex bg-[#0084F0]">
+                <div class="flex items-center gap-2" id="home">
+                    <a href="index.html"><span class="text-3xl font-bold text-[#FAF9F6]">SWIFTLY</span></a>
+                </div>
+                <div class="hidden md:flex items-center gap-10">
+                    <!-- Search Bar -->
+                    <div
+                        class="flex search items-center rounded-full px-4 py-2 w-[40rem] bg-[#FAF9F6] focus:outline-sky-500 focus:border-[--var(primary)]">
+                        <i class="fa-solid fa-magnifying-glass text-sm justify-center mx-2"></i>
+                        <input type="text" id="search" placeholder="search for brands, products and categories"
+                            class="outline-none w-full caret-blue-400 focus:outline focus:outline-4 focus:outline-red-500 bg-[#FAF9F6] text-md p-1">
+                    </div>
+                    <!-- Account -->
+                    <div class="acc flex-col relative">
+                        <div class="account drop flex gap-2 cursor-pointer items-center hover:text-[#AFFF00]">
+                            <img width="24" height="24" src="https://img.icons8.com/ffffff/material-sharp/32/user.png"
+                                alt="user" />
+                            <span class="text-md font-semibold text-white">Account</span>
+                            <i class="fa-solid fa-angle-down text-white text-sm mt-[.4rem] hover:text-[#AFFF00] hover:translate-y"
+                                id="arrow"></i>
+                        </div>
+                        <!-- Dropdown -->
+                        <div
+                            class="acc-menu dropdown-menu hidden absolute top-full left-0 mt-3 bg-white shadow-lg rounded-md p-5 w-40 z-50 hover:text-[#AFFF00]">
+                            <div class="sign-in" id="sign-in">
+                                <button
+                                    class="w-full bg-[#AFFF00] transition text-lime-700 rounded-md py-2 hover:font-semibold duration-100 ease-in-out hover:bg-[#adfa07]">logout</button>
+                            </div>
+
+
+                            <div class="orders flex items-center gap-2 mt-4 text-gray-700 hover:text-[var(--accent)]">
+                                <i class="fa-solid fa-truck"></i>
+                                <p>Orders</p>
+                            </div>
+                            <div class="wishlist flex items-center gap-2 mt-4 text-gray-700 hover:text-[var(--accent)]">
+                                <i class="fa-regular fa-heart"></i>
+                                <p>Wishlist</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Help -->
+                    <div class="help flex-col relative">
+                        <div class="flex gap-2 cursor-pointer items-center hover:text-[#AFFF00">
+                            <img width="22" height="24" src="https://img.icons8.com/ffffff/ios-filled/100/help.png"
+                                alt="help" />
+                            <span class="text-md font-semibold text-white">Help</span>
+                            <i class="fa-solid help fa-angle-down text-white text-sm mt-[.4rem] hover:text-[#AFFF00] hover:translate-y"
+                                id="arrow-help"></i>
+                        </div>
+                        <!-- Dropdown -->
+                        <div class="help-menu dropdown-menu hidden absolute top-full left-0 mt-3 bg-white shadow-lg rounded-md p-5 w-44 z-50"
+                            id="help-menu">
+                            <div
+                                class="agent-msg flex items-center gap-3 mt-4 text-gray-700 hover:text-[var(--accent)]">
+                                <i class="fa-solid fa-robot"></i>
+                                <p class="ai-assistant">AI Assistant</p>
+                            </div>
+                            <div
+                                class="agent-call flex items-center gap-3 mt-4 text-gray-700 hover:text-[var(--accent)]">
+                                <i class="fa-solid fa-phone"></i>
+                                <p class="customer-care">Customer Care</p>
+                            </div>
+                            <div class="Email flex items-center gap-4 mt-4 text-gray-700 hover:text-[var(--accent)]">
+                                <i class="fa-solid fa-envelope"></i>
+                                <p class="send-email">Send Email</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cart -->
+                    <!-- NEW CODE: Link cart to cart.html -->
+                    <a href="cart.html" class="cart flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-xl text-white"></i>
+                        <span class="text-md font-semibold text-white">Cart</span>
+                        <span id="noOfItemsCart" class="text-[#AFFF00] font-semibold text-lg">0</span>
+                    </a>
+                </div>
+                <button id="menuBtn" class="flex md:hidden text-white text-2xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </nav>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu"
+                class="fixed top-0 left-0 w-full h-full bg-primary bg-opacity-95 z-20 flex-col items-center justify-center hidden">
+                <button id="closeMenu" class="absolute top-4 right-6 text-white text-3xl">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+                <div class="flex flex-col gap-8 items-center mt-20">
+                    <div class="flex items-center gap-2">
+                        <img width="24" height="24" src="https://img.icons8.com/ffffff/material-sharp/32/user.png"
+                            alt="user" />
+                        <span class="text-md font-semibold text-white">Account</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <img width="24" height="24" src="https://img.icons8.com/ffffff/ios-filled/100/help.png"
+                            alt="help" />
+                        <span class="text-md font-semibold text-white">Help</span>
+                    </div>
+                    <!-- NEW CODE: Link mobile cart to cart.html -->
+                    <a href="cart.html" class="flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-xl text-white"></i>
+                        <span class="text-md font-semibold text-white">Cart</span>
+                        <span id="noOfItemsCartMobile" class="text-accent font-semibold text-lg">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="results" class="hidden w-full justify-center items center p-4 mt-4 relative px-6">
+            <!-- Back Button -->
+            <button
+                class="back-btn absolute top-3 left-6 px-4 py-2 text-gray-700 text-sm sm:text-base rounded-md font-semibold bg-gray-100 hover:bg-gray-200 transition"
+                id="backToMain">
+                &#10094; Back
+            </button>
+            <!-- Grid for Search Items -->
+            <div
+                class="max-w-[1440px] mx-auto mr-4 search-items grid gap-x-6 mt-12 px-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
+                <!-- Product cards will be injected here -->
+            </div>
+        </div>
+
+
+        <div class="itemsSection" id="container">
+            <!-- Hero Section -->
+            <div class="HeroSection flex p-6 gap-4 justify-center align-middle">
+                <!-- LEFT -->
+                <div class="categories hidden lg:flex bg-[#0080ff] px-4 py-4 h-[32rem] text-white  text-md rounded-md min-w-60 
+            flex-col items-center justify-center space-y-5">
+                    <a href="#tops-section"
+                        class="flex items-center gap-3 hover:text-[#AFFF00] cursor-pointer transition-colors">
+                        <i class="fas fa-tshirt"></i> Fashion
+                    </a>
+                    <a href="#laptops-section"
+                        class="flex items-center gap-3 hover:text-[#AFFF00] cursor-pointer transition-colors">
+                        <i class="fas fa-laptop"></i> Electronics
+                    </a>
+                    <a href="#furniture-section"
+                        class="flex items-center gap-3 hover:text-[#AFFF00] cursor-pointer transition-colors">
+                        <i class="fas fa-couch"></i> Home & Furniture
+                    </a>
+                    <a href="#appliances-section"
+                        class="flex items-center gap-3 hover:text-[#AFFF00] cursor-pointer transition-colors">
+                        <i class="fas fa-blender"></i> Appliances
+                    </a>
+                    <a href="#beauty-section"
+                        class="flex items-center gap-3 hover:text-[#AFFF00] cursor-pointer transition-colors">
+                        <i class="fas fa-heartbeat"></i> Health & Beauty
+                    </a>
+                    <a href="#fragrances-section"
+                        class="flex items-center gap-3 hover:text-[#AFFF00] cursor-pointer transition-colors">
+                        <i class="fas fa-pump-soap"></i> Fragrances
+                    </a>
+                    <a href="#smartphones-section"
+                        class="flex items-center gap-3 hover:text-[#00F0FF] cursor-pointer transition-colors">
+                        <i class="fas fa-mobile-alt"></i> Phones & Tablets
+                    </a>
+                    <a href="#more-section"
+                        class="flex items-center gap-3 hover:text-[#AFFF00] cursor-pointer transition-colors">
+                        <i class="fas fa-ellipsis-h"></i> More
+                    </a>
+                </div>
+
+                <!-- MIDDLE -->
+                <div class="flex flex-col bg-[var(--primary)] p-3 w-full rounded-md h-auto">
+                    <div
+                        class="slider-container relative w-full max-w-[1200px] mx-auto my-auto overflow-hidden flex justify-center items-center">
+                        <!-- Slider Track -->
+                        <div id="slider-track" class="flex transition-transform duration-700 ease-in-out">
+                            <!-- Cloned Last Slide for Infinite Loop -->
+                            <img src="https://via.placeholder.com/660x330?text=Ad+3" class="w-full flex-shrink-0"
+                                alt="">
+
+                            <!-- Real Slides -->
+                            <img src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2025/0-1Advertising/July/Nivea/SUN/NVA-660x330.jpg"
+                                class="w-full flex-shrink-0" alt="">
+                            <img src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2025/0-1Advertising/July/Nivea/SUN/NVA-660x330.jpg"
+                                class="w-full flex-shrink-0" alt="">
+                            <img src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2025/0-1Advertising/July/Nivea/SUN/NVA-660x330.jpg"
+                                class="w-full flex-shrink-0" alt="">
+                            <img src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2025/0-1Advertising/July/Nivea/SUN/NVA-660x330.jpg"
+                                class="w-full flex-shrink-0" alt="">
+                            <img src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2025/0-1Advertising/July/Nivea/SUN/NVA-660x330.jpg"
+                                class="w-full flex-shrink-0" alt="">
+
+                            <!-- Cloned First Slide for Infinite Loop -->
+                            <img src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2025/0-1Advertising/July/Nivea/SUN/NVA-660x330.jpg"
+                                class="w-full flex-shrink-0" alt="">
+                        </div>
+                        <!-- Dot Indicators -->
+
+                        <!-- Navigation Buttons -->
+                        <button id="prevBtn"
+                            class="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow text-black z-10">&#10094;</button>
+                        <button id="nextBtn"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow text-black z-10">
+                            &#10095;</button>
+                    </div>
+                    <div id="dots" class="flex justify-center mt-4 gap-2 "></div>
+                </div>
+
+                <!-- RIGHT -->
+                <div
+                    class="categories hidden lg:flex bg-[#0084F0] flex-col justify-evenly gap-4 items-center text-center min-w-60 text-lg rounded-md">
+                    <div class="productCard w-40 h-auto bg-white p-4 ">
+                        <img src="https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/1.webp" alt="">
+                        <p>Get 80% OFF</p>
+                    </div>
+                    <div class="productCard w-40 h-auto bg-white p-4 ">
+                        <img src="https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/1.webp" alt="">
+                        <p>Get 80% OFF</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEATURED PRODUCTS-->
+            <center class="text-xl font-semibold mt-2 overflow-x-hidden">FEATURED PRODUCTS</center>
+            <div
+                class="featured flex gap-4 p-4 mt-4 justify-center items-stretch flex-nowrap overflow-x-auto hide-scrollbar w-full">
+                <!-- Product Card 1: Perfume -->
+            </div>
+
+            <br>
+
+            <!-- Flashsales -->
+            <center class="text-xl font-semibold mt-2 overflow-x-hidden">FLASH SALES</center>
+            <div
+                class="flash-sales flex flex-wrap gap-4 mt-4 pb-3  justify-center items-stretch overflow-x-auto hide-scrollbar w-full">
+            </div>
+
+            <br>
+            <div class="productDisplay px-9 flex-col gap-y-4 items-center">
+            </div>
+        </div>
+        <!-- Product Description -->
+        <div class="productInfo flex-col hidden md:flex-row justify-between relative p-6 overflow-hidden bg-white shadow-md"
+            id="productInfo">
+        </div>
+    </div>
+    <!-- Voice Agent -->
+    <div class="voice-agent hidden py-8 bg-[var(--primary)]">
+        <button
+            class="back-btn-voice absolute top-3 left-6 px-4 py-2 text-gray-700 text-sm sm:text-base rounded-md font-semibold bg-gray-100 hover:bg-gray-200 transition"
+            id="backToMain">
+            &#10094; Back
+        </button>
+        <iframe id="JotFormIFrame-01982d2f5bea7385813bfb66f4e57fa2932a" title="Swifty: Customer Service Representative"
+            onload="window.parent.scrollTo(0,0)" allowtransparency="true"
+            allow="geolocation; microphone; camera; fullscreen"
+            src="https://agent.jotform.com/01982d2f5bea7385813bfb66f4e57fa2932a/voice?embedMode=iframe&background=1&shadow=1"
+            frameborder="0" style="
+    min-width:100%;
+    max-width:100%;
+    height:688px;
+    border:none;
+    width:100%;
+  " scrolling="no">
+        </iframe>
+        <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+        <script>
+            window.jotformEmbedHandler("iframe[id='JotFormIFrame-01982d2f5bea7385813bfb66f4e57fa2932a']",
+                "https://www.jotform.com")
+        </script>
+    </div>
+
+    <!-- msg agent -->
+    <div class="msg-agent hidden">
+        <button
+            class="back-btn-msg absolute top-3 left-6 px-4 py-2 text-gray-700 text-sm sm:text-base rounded-md font-semibold bg-gray-100 hover:bg-gray-200 transition"
+            id="backToMain">
+            &#10094; Back
+        </button>
+        <iframe id="JotFormIFrame-01982d2f5bea7385813bfb66f4e57fa2932a" title="Swifty: Customer Service Representative"
+            onload="window.parent.scrollTo(0,0)" allowtransparency="true"
+            allow="geolocation; microphone; camera; fullscreen"
+            src="https://agent.jotform.com/01982d2f5bea7385813bfb66f4e57fa2932a?embedMode=iframe&background=1&shadow=1"
+            frameborder="0" style="
+    min-width:100%;
+    max-width:100%;
+    height:688px;
+    border:none;
+    width:100%;
+  " scrolling="no">
+        </iframe>
+        <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+        <script>
+            window.jotformEmbedHandler("iframe[id='JotFormIFrame-01982d2f5bea7385813bfb66f4e57fa2932a']",
+                "https://www.jotform.com")
+        </script>
+    </div>
+
+    <script src="/js/agent.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/effects.js"></script>
+    <script src="/js/cart.js"></script>
+</body>
+
+</html>
